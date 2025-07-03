@@ -20,4 +20,16 @@
 			<templatecode><![CDATA[{include file='__searchAreaFaqSettings'}]]></templatecode>
 		</templatelistener>
 	</import>
+	<delete>
+		<templatelistener name="faqWysiwygBeforeEditorJavaScript">
+			<environment>user</environment>
+			<templatename>wysiwyg</templatename>
+			<eventname>wysiwyg</eventname>
+		</templatelistener>
+		<templatelistener name="faqWysiwygBeforeEditorJavaScript">
+			<environment>user</environment>
+			<templatename>wysiwyg</templatename>
+			<eventname>beforeEditorJavaScript</eventname>
+		</templatelistener>
+	</delete>
 </data>

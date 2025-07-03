@@ -38,5 +38,6 @@
 	</instructions>
 	<instructions type="update" fromversion="2.2.7">
 		<instruction type="file"/>
+		<instruction type="templateListener"/>
 	</instructions>
 </package>
