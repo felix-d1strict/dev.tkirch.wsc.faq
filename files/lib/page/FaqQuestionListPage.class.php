@@ -45,7 +45,7 @@ class FaqQuestionListPage extends AbstractPage
                     EOT
             );
 
-            $this->category = FaqCategory::getCategory($queryParameters['id']);
+            $this->category = FaqCategory::getCategory((int)$queryParameters['id']);
         } catch (MappingError) {
             throw new IllegalLinkException();
         }
