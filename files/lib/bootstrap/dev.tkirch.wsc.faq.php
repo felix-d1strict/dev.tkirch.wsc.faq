@@ -7,6 +7,11 @@ use wcf\acp\page\FaqQuestionListPage;
 use wcf\event\acp\menu\item\ItemCollecting;
 use wcf\event\endpoint\ControllerCollecting;
 use wcf\event\worker\RebuildWorkerCollecting;
+use wcf\system\endpoint\controller\hanashi\questions\ChangeShowOrder;
+use wcf\system\endpoint\controller\hanashi\questions\DeleteQuestion;
+use wcf\system\endpoint\controller\hanashi\questions\DisableQuestion;
+use wcf\system\endpoint\controller\hanashi\questions\EnableQuestion;
+use wcf\system\endpoint\controller\hanashi\questions\GetShowOrder;
 use wcf\system\endpoint\controller\hanashi\questions\search\GetSearch;
 use wcf\system\endpoint\controller\hanashi\questions\search\RenderSearch;
 use wcf\system\event\EventHandler;
@@ -83,6 +88,11 @@ return static function (): void {
     EventHandler::getInstance()->register(
         ControllerCollecting::class,
         static function (ControllerCollecting $event) {
+            $event->register(new DeleteQuestion());
+            $event->register(new DisableQuestion());
+            $event->register(new EnableQuestion());
+            $event->register(new GetShowOrder());
+            $event->register(new ChangeShowOrder());
             $event->register(new RenderSearch());
             $event->register(new GetSearch());
         }
