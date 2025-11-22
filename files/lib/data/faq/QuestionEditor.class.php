@@ -37,11 +37,11 @@ final class QuestionEditor extends DatabaseObjectEditor implements IEditableCach
 
         //check showOrder
         if ($showOrder < $this->showOrder) {
-            $sql = "UPDATE	" . static::getDatabaseTableName() . "
-				SET	showOrder = showOrder + 1
-				WHERE	showOrder >= ?
-				AND	 showOrder < ?";
-            $statement = WCF::getDB()->prepareStatement($sql);
+            $sql = "UPDATE  wcf1_faq_questions
+                    SET	    showOrder = showOrder + 1
+                    WHERE   showOrder >= ?
+                        AND showOrder < ?";
+            $statement = WCF::getDB()->prepare($sql);
             $statement->execute([
                 $showOrder,
                 $this->showOrder,
@@ -56,11 +56,11 @@ final class QuestionEditor extends DatabaseObjectEditor implements IEditableCach
             }
 
             //update databse
-            $sql = "UPDATE	" . static::getDatabaseTableName() . "
-				SET	showOrder = showOrder - 1
-				WHERE	showOrder <= ?
-				AND	 showOrder > ?";
-            $statement = WCF::getDB()->prepareStatement($sql);
+            $sql = "UPDATE  wcf1_faq_questions
+                    SET	    showOrder = showOrder - 1
+                    WHERE   showOrder <= ?
+                        AND showOrder > ?";
+            $statement = WCF::getDB()->prepare($sql);
             $statement->execute([
                 $showOrder,
                 $this->showOrder,
@@ -76,9 +76,9 @@ final class QuestionEditor extends DatabaseObjectEditor implements IEditableCach
      */
     public static function getShowOrder(): int
     {
-        $sql = "SELECT MAX(showOrder) AS showOrder
-			FROM " . static::getDatabaseTableName();
-        $statement = WCF::getDB()->prepareStatement($sql);
+        $sql = "SELECT  MAX(showOrder) AS showOrder
+                FROM    wcf1_faq_questions";
+        $statement = WCF::getDB()->prepare($sql);
         $statement->execute();
         $row = $statement->fetchArray();
 
