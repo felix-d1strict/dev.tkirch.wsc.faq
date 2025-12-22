@@ -4,10 +4,12 @@ namespace wcf\acp\page;
 
 use Override;
 use wcf\page\AbstractGridViewPage;
-use wcf\system\gridView\AbstractGridView;
 use wcf\system\gridView\admin\FaqQuestionGridView;
 use wcf\system\WCF;
 
+/**
+ * @extends AbstractGridViewPage<FaqQuestionGridView>
+ */
 final class FaqQuestionListPage extends AbstractGridViewPage
 {
     /**
@@ -33,7 +35,7 @@ final class FaqQuestionListPage extends AbstractGridViewPage
     }
 
     #[Override]
-    protected function createGridView(): AbstractGridView
+    protected function createGridView(): FaqQuestionGridView
     {
         return new FaqQuestionGridView();
     }

@@ -5,7 +5,7 @@ namespace wcf\system\gridView\admin;
 use Override;
 use wcf\acp\form\FaqQuestionEditForm;
 use wcf\data\category\CategoryNodeTree;
-use wcf\data\DatabaseObjectList;
+use wcf\data\faq\Question;
 use wcf\data\faq\QuestionList;
 use wcf\system\gridView\AbstractGridView;
 use wcf\system\gridView\GridViewColumn;
@@ -25,6 +25,9 @@ use wcf\system\view\filter\IntegerFilter;
 use wcf\system\view\filter\ObjectIdFilter;
 use wcf\system\WCF;
 
+/**
+ * @extends AbstractGridView<Question, QuestionList>
+ */
 final class FaqQuestionGridView extends AbstractGridView
 {
     public function __construct()
@@ -93,7 +96,7 @@ final class FaqQuestionGridView extends AbstractGridView
     }
 
     #[Override]
-    protected function createObjectList(): DatabaseObjectList
+    protected function createObjectList(): QuestionList
     {
         return new QuestionList();
     }

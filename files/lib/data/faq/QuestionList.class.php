@@ -5,11 +5,7 @@ namespace wcf\data\faq;
 use wcf\data\DatabaseObjectList;
 
 /**
- * @method  Question        current()
- * @method  Question[]       getObjects()
- * @method  Question|null    getSingleObject()
- * @method  Question|null    search($objectID)
- * @property    Question[] $objects
+ * @extends DatabaseObjectList<Question>
  */
 final class QuestionList extends DatabaseObjectList
 {

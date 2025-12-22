@@ -38,7 +38,7 @@ final class FaqBBCode extends AbstractBBCode
             return WCF::getTPL()->render('wcf', 'faqBBCode', [
                 'question' => $question,
                 'collapseQuestion' => $collapse,
-            ], true);
+            ]);
         }
 
         return $question->getTitle() . "\n\n" . $question->getPlainOutput();

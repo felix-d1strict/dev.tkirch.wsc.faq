@@ -8,6 +8,9 @@ use wcf\data\faq\QuestionList;
 use wcf\data\language\item\LanguageItemList;
 use wcf\system\search\SearchIndexManager;
 
+/**
+ * @extends AbstractRebuildDataWorker<QuestionList>
+ */
 final class FaqQuestionSearchIndexRebuildDataWorker extends AbstractRebuildDataWorker
 {
     /**
@@ -96,6 +99,9 @@ final class FaqQuestionSearchIndexRebuildDataWorker extends AbstractRebuildDataW
         }
     }
 
+    /**
+     * @return array<string, non-empty-array<int, string>>
+     */
     private function getLanguageCache(): array
     {
         $languageVariables = [];

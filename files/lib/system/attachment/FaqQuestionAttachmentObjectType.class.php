@@ -3,8 +3,12 @@
 namespace wcf\system\attachment;
 
 use Override;
+use wcf\data\faq\Question;
 use wcf\system\WCF;
 
+/**
+ * @extends AbstractAttachmentObjectType<Question>
+ */
 final class FaqQuestionAttachmentObjectType extends AbstractAttachmentObjectType
 {
     #[Override]

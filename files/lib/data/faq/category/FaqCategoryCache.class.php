@@ -2,6 +2,7 @@
 
 namespace wcf\data\faq\category;
 
+use wcf\data\category\Category;
 use wcf\system\category\CategoryHandler;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
@@ -14,7 +15,7 @@ final class FaqCategoryCache extends SingletonFactory
      */
     private array $questions;
 
-    private function initQuestions()
+    private function initQuestions(): void
     {
         $this->questions = [];
 
@@ -38,7 +39,13 @@ final class FaqCategoryCache extends SingletonFactory
         $this->countQuestions($categoryToParent, $contacts, 0);
     }
 
-    private function countQuestions(array $categoryToParent, array &$contacts, $categoryID)
+    /**
+     *
+     * @param array<int, list<int>> $categoryToParent
+     * @param array<int, int> &$contacts
+     * @param int $categoryID
+     */
+    private function countQuestions(array $categoryToParent, array &$contacts, int $categoryID): int
     {
         $count = (isset($contacts[$categoryID])) ? $contacts[$categoryID] : 0;
         if (isset($categoryToParent[$categoryID])) {
@@ -54,7 +61,7 @@ final class FaqCategoryCache extends SingletonFactory
         return $count;
     }
 
-    public function getQuestions($categoryID)
+    public function getQuestions(int $categoryID): int
     {
         if (!isset($this->questions)) {
             $this->initQuestions();

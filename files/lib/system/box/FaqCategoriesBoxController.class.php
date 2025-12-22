@@ -29,6 +29,7 @@ final class FaqCategoriesBoxController extends AbstractCategoriesBoxController
                 || RequestHandler::getInstance()->getActiveRequest()->getRequestObject() instanceof FaqQuestionPage
             ) {
                 if (isset(RequestHandler::getInstance()->getActiveRequest()->getRequestObject()->category)) {
+                    // @phpstan-ignore property.protected
                     $activeCategory = RequestHandler::getInstance()->getActiveRequest()->getRequestObject()->category;
                 }
             }

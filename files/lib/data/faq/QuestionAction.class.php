@@ -16,8 +16,7 @@ use wcf\system\search\SearchIndexManager;
 use wcf\system\WCF;
 
 /**
- * @method  QuestionEditor[] getObjects()
- * @method  QuestionEditor   getSingleObject()
+ * @extends AbstractDatabaseObjectAction<Question, QuestionEditor>
  */
 final class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAction, IToggleAction
 {
@@ -139,7 +138,7 @@ final class QuestionAction extends AbstractDatabaseObjectAction implements ISort
             $this->updateSearchIndex($object);
 
             //update show order
-            if (isset($this->parameters['data']['showOrder']) && $this->parameters['data']['showOrder'] !== null) {
+            if (isset($this->parameters['data']['showOrder'])) {
                 if ($object->showOrder < $this->parameters['data']['showOrder']) {
                     $sql = "UPDATE  wcf1_faq_questions
 					SET	showOrder = showOrder - 1
@@ -188,7 +187,7 @@ final class QuestionAction extends AbstractDatabaseObjectAction implements ISort
         }
     }
 
-    private function updateSearchIndex($object)
+    private function updateSearchIndex(Question|QuestionEditor $object): void
     {
         if (isset($this->parameters['answer_i18n'])) {
             foreach ($this->parameters['answer_i18n'] as $languageID => $answer) {

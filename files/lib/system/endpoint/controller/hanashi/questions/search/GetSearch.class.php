@@ -63,6 +63,7 @@ final class GetSearch implements IController
     }
 
     /**
+     * @param list<int> $questionIDs
      * @return list<Question>
      */
     private function getQuestions(array $questionIDs): array
