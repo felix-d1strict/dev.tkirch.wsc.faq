@@ -3,12 +3,16 @@
 namespace wcf\system\search;
 
 use Override;
+use wcf\data\faq\Question;
 use wcf\data\faq\QuestionList;
 use wcf\data\search\ISearchResultObject;
 use wcf\system\WCF;
 
 final class FaqQuestionSearch extends AbstractSearchProvider
 {
+    /**
+     * @var array<int, Question>
+     */
     private array $faqCache = [];
 
     #[Override]
@@ -78,7 +82,7 @@ final class FaqQuestionSearch extends AbstractSearchProvider
     }
 
     #[Override]
-    public function getCustomIconName(): ?string
+    public function getCustomIconName(): string
     {
         return 'circle-question';
     }

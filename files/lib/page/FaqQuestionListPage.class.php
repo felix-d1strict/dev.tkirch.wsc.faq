@@ -20,6 +20,9 @@ class FaqQuestionListPage extends AbstractPage
      */
     public $neededPermissions = ['user.faq.canViewFAQ'];
 
+    /**
+     * @var array<int, object>
+     */
     protected array $faqs = [];
 
     protected int $showFaqAddDialog = 0;
@@ -67,8 +70,7 @@ class FaqQuestionListPage extends AbstractPage
             }
             if (
                 isset($this->category)
-                && $this->category !== null
-                && $this->category->categoryID != $category->categoryID
+                && $this->category->categoryID !== $category->categoryID
             ) {
                 continue;
             }
@@ -115,6 +117,10 @@ class FaqQuestionListPage extends AbstractPage
         ]);
     }
 
+    /**
+     * @param int[] $questionIDs
+     * @return array<void>|GroupedAttachmentList
+     */
     protected function getAttachmentList(array $questionIDs): array|GroupedAttachmentList
     {
         if ($questionIDs === []) {

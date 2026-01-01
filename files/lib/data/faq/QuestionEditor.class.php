@@ -9,9 +9,9 @@ use wcf\system\cache\builder\FaqQuestionListCacheBuilder;
 use wcf\system\WCF;
 
 /**
- * @method static Question     create(array $parameters = [])
- * @method      Question     getDecoratedObject()
  * @mixin       Question
+ * @extends DatabaseObjectEditor<Question>
+ * @implements IEditableCachedObject<Question>
  */
 final class QuestionEditor extends DatabaseObjectEditor implements IEditableCachedObject
 {
@@ -31,10 +31,6 @@ final class QuestionEditor extends DatabaseObjectEditor implements IEditableCach
      */
     public function updateShowOrder(int $showOrder): int
     {
-        if ($showOrder === null) {
-            $showOrder = \PHP_INT_MAX;
-        }
-
         //check showOrder
         if ($showOrder < $this->showOrder) {
             $sql = "UPDATE  wcf1_faq_questions

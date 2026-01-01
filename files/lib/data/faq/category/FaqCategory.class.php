@@ -18,7 +18,7 @@ use wcf\util\StringUtil;
 /**
  * @method      FaqCategory[]    getChildCategories()
  * @method      FaqCategory[]    getAllChildCategories()
- * @method      FaqCategory      getParentCategory()
+ * @method      ?FaqCategory      getParentCategory()
  * @method      FaqCategory[]    getParentCategories()
  * @method static FaqCategory|null getCategory($categoryID)
  */
@@ -26,6 +26,9 @@ final class FaqCategory extends AbstractDecoratedCategory implements IAccessible
 {
     public const OBJECT_TYPE_NAME = 'dev.tkirch.wsc.faq.category';
 
+    /**
+     * @var array<int, array<string, bool>>
+     */
     private array $userPermissions = [];
 
     private bool $prefix = false;
@@ -40,7 +43,7 @@ final class FaqCategory extends AbstractDecoratedCategory implements IAccessible
         return $this->getPermission('canViewFAQ', $user);
     }
 
-    public function getPermission($permission, ?User $user = null, $isMod = false)
+    public function getPermission(string $permission, ?User $user = null, bool $isMod = false): bool
     {
         if ($user === null) {
             $user = WCF::getUser();
@@ -74,7 +77,7 @@ final class FaqCategory extends AbstractDecoratedCategory implements IAccessible
         return ($this->prefix ? '&nbsp;&nbsp;' : '') . WCF::getLanguage()->get($this->title);
     }
 
-    public function setPrefix($prefix = true)
+    public function setPrefix(bool $prefix = true): void
     {
         $this->prefix = $prefix;
     }

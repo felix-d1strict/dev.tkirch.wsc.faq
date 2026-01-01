@@ -1,0 +1,3 @@
+parameters:
+   dynamicConstantNames:
+        - SIMPLE_FAQ_VIEW

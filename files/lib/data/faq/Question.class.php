@@ -85,7 +85,7 @@ final class Question extends DatabaseObject implements IRouteController, ISearch
             return false;
         }
 
-        if ($this->getCategory()) {
+        if ($this->getCategory()->categoryID) {
             return $this->getCategory()->isAccessible($user);
         }
 

@@ -36,7 +36,7 @@ final class GetSearch implements IController
     }
 
     /**
-     * @return list<int>
+     * @return int[]
      */
     private function getQuestionsIDs(string $query): array
     {
@@ -63,7 +63,8 @@ final class GetSearch implements IController
     }
 
     /**
-     * @return list<Question>
+     * @param int[] $questionIDs
+     * @return Question[]
      */
     private function getQuestions(array $questionIDs): array
     {

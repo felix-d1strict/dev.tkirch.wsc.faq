@@ -4,12 +4,15 @@ namespace wcf\acp\form;
 
 use Laminas\Diactoros\Response\RedirectResponse;
 use Override;
+use wcf\data\faq\category\FaqCategory;
+use wcf\data\faq\category\FaqCategoryNode;
 use wcf\data\faq\category\FaqCategoryNodeTree;
 use wcf\data\faq\Question;
 use wcf\data\faq\QuestionAction;
 use wcf\data\faq\QuestionEditor;
 use wcf\data\IStorableObject;
 use wcf\data\language\item\LanguageItemList;
+use wcf\data\language\Language;
 use wcf\form\AbstractFormBuilderForm;
 use wcf\system\form\builder\container\FormContainer;
 use wcf\system\form\builder\container\TabFormContainer;
@@ -23,10 +26,12 @@ use wcf\system\form\builder\field\TextFormField;
 use wcf\system\form\builder\IFormDocument;
 use wcf\system\html\input\HtmlInputProcessor;
 use wcf\system\language\LanguageFactory;
-use wcf\system\request\IRouteController;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 
+/**
+ * @extends AbstractFormBuilderForm<Question>
+ */
 class FaqQuestionAddForm extends AbstractFormBuilderForm
 {
     /**
@@ -57,8 +62,14 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm
 
     protected int $isMultilingual = 0;
 
+    /**
+     * @var array<int, string>
+     */
     protected array $multiLingualAnswers = [];
 
+    /**
+     * @var array<int, FaqCategoryNode|FaqCategory>
+     */
     protected array $categories;
 
     #[Override]
@@ -205,13 +216,7 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm
             'isMultilingual' => $this->isMultilingual,
         ];
         if ($this->formObject !== null) {
-            if ($this->formObject instanceof IRouteController) {
-                $parameters['object'] = $this->formObject;
-            } else {
-                $object = $this->formObject;
-
-                $parameters['id'] = $object->{$object::getDatabaseTableIndexName()};
-            }
+            $parameters['object'] = $this->formObject;
         }
 
         $this->form->action(LinkHandler::getInstance()->getControllerLink(static::class, $parameters));
@@ -227,6 +232,9 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm
         ]);
     }
 
+    /**
+     * @return array<int, FaqCategoryNode|FaqCategory>
+     */
     protected function getCategories(): array
     {
         if (!isset($this->categories)) {
@@ -235,9 +243,15 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm
             $categoryList = $categoryTree->getIterator();
 
             $this->categories = [];
+            /**
+             * @var FaqCategoryNode $category
+             */
             foreach ($categoryList as $category) {
                 $this->categories[$category->categoryID] = $category;
 
+                /**
+                 * @var FaqCategory[]
+                 */
                 $childCategories = $category->getAllChildCategories();
                 if (!\count($childCategories)) {
                     continue;
