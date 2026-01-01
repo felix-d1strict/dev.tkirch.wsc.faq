@@ -41,7 +41,7 @@ final class FaqCategoryCache extends SingletonFactory
 
     /**
      *
-     * @param array<int, list<int>> $categoryToParent
+     * @param array<int, int[]> $categoryToParent
      * @param array<int, int> &$contacts
      * @param int $categoryID
      */

@@ -37,7 +37,7 @@ final class ChangeShowOrder implements IController
     }
 
     /**
-     * @param list<ShowOrderItem> $items
+     * @param ShowOrderItem[] $items
      */
     private function saveShowOrder(array $items): void
     {

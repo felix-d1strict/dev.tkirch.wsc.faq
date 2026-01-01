@@ -118,7 +118,7 @@ class FaqQuestionListPage extends AbstractPage
     }
 
     /**
-     * @param list<int> $questionIDs
+     * @param int[] $questionIDs
      * @return array<void>|GroupedAttachmentList
      */
     protected function getAttachmentList(array $questionIDs): array|GroupedAttachmentList
